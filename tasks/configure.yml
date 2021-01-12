@@ -1,6 +1,46 @@
+---
+- name: Check if database directory avaliable - {{ mariadb_data_dir }}
+  stat:
+    path: "{{ mariadb_data_dir | dirname }}"
+  register: stat_data_directory
+  when: mariadb_data_dir  != "/var/lib/mysql"
 
-- name: Start and enable MariaDB on boot.
-  service: 
-    name: "{{ mariadb_daemon }}"
-    state: started 
-    enabled: yes
+- name: Create database directory - {{ mariadb_data_dir }}
+  file:
+    state: directory
+    path: "{{ mariadb_data_dir }}"
+    recurse: yes
+    owner: mysql
+    group: mysql
+    mode: "0755"
+  when: 
+    - not stat_data_directory.stat.exists
+    - mariadb_data_dir  != "/var/lib/mysql"
+
+- name: Deploy custom configuration file
+  template:
+    src: server.cnf.j2
+    dest: "{{ mariadb_config_dir }}/server-custom.cnf"
+    owner: root
+    group: root
+    mode: 644
+
+
+- name: Debian specific configs
+  block:
+  - name: Disable socket on mariadb.cnf
+    replace: 
+      path: /etc/mysql/mariadb.cnf
+      regexp: '^socket'
+      replace: '#socket'
+
+  - name: Run mysql_install_db
+    command: mysql_install_db -u mysql
+  when: ansible_os_family == "Debian"
+
+- name: Start and enable MariaDB service on boot
+  systemd:
+    name: mariadb
+    state: started
+    enabled: true  
+

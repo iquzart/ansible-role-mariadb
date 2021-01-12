@@ -15,8 +15,10 @@
 
 - name: RedHat | Install MariaDB {{ mariadb_version }} packages
   yum:
-    name: mariadb-server
     state: present
+    name: 
+      - mariadb-server
+      - python3-PyMySQL
   tags:
     - install
     - packages

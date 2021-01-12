@@ -2,7 +2,7 @@
 # handlers file for ansible-role-mariadb
 
 
-- name: mariadb restart
+- name: restart mariadb
   systemd:
     name: mariadb
     state: restarted

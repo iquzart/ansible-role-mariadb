@@ -1,0 +1,16 @@
+
+# {{ ansible_managed }}
+
+[mysqld]
+#
+# * Basic Settings
+#
+datadir={{ mariadb_data_dir }}
+socket={{ mariadb_data_dir }}/mysql.sock
+bind-address={{ mariadb_bind_address }}
+
+
+[client]
+port={{ mariadb_port }}
+socket={{ mariadb_data_dir }}/mysql.sock
+
