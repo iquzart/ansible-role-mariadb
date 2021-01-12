@@ -1,2 +1,52 @@
 ---
 # tasks file for ansible-role-mariadb
+
+- name: Include distribution variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: 
+    - install 
+    - configure
+
+- name: Install RHEL
+  include: install.rhel.yml
+  when: ansible_os_family == "RedHat"
+  tags: 
+    - install 
+    - configure
+
+- name: Install Debian
+  include: install.debian.yml
+  when: ansible_os_family == "Debian"
+  tags: 
+    - install 
+    - configure
+
+- name: Configure 
+  include: configure.yml
+  tags: 
+    - directories
+    - configure
+
+
+
+#- name: ansible destribution - major version
+#  debug:
+#    var: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}"
+
+#- name: ansible_os_family
+#  debug:
+#    var: "{{ ansible_os_family }}"
+
+#- name: ansible_distribution
+#  debug:
+#    var: "{{ ansible_distribution }}"
+
+
+- name: check vars
+  debug:
+    var: "{{ mariadb_version }}"
