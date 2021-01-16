@@ -2,6 +2,11 @@
 - name: Converge
   hosts: all
   tasks:
+    - name: Install rsync
+      package:
+        name: rsync
+        state: latest
+
     - name: "Include ansible-role-mariadb"
       include_role:
         name: "ansible-role-mariadb"

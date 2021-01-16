@@ -1,5 +1,10 @@
 ---
 # vars file for ansible-role-mariadb
 
+mariadb_packages:
+  - mariadb-server
+  - mariadb-client
+  - python3-pymysql
+
 mariadb_config_file: /etc/mysql/mariadb.cnf
 mariadb_config_dir: /etc/mysql/mariadb.conf.d

@@ -2,13 +2,12 @@
 # Install MariaDB on RHEL Based systems
 
 - name: RedHat | Create MariaDB {{ mariadb_version }} repository
-  yum_repository:
-    name: MariaDB-{{ mariadb_version }}
-    description: "MariaDB Repo"
-    baseurl: "http://yum.mariadb.org/{{ mariadb_version }}/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}-amd64"
-    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-    gpgcheck: true
-    state: present
+  template:
+    src: mariadb.repo.j2
+    dest: "/etc/yum.repos.d/MariaDB-{{ mariadb_version }}.repo"
+    owner: root
+    group: root
+    mode: 644
   tags:
     - install
     - repository
@@ -16,9 +15,8 @@
 - name: RedHat | Install MariaDB {{ mariadb_version }} packages
   yum:
     state: present
-    name: 
-      - mariadb-server
-      - python3-PyMySQL
+    enablerepo: MariaDB-{{ mariadb_version }}
+    name: "{{ mariadb_packages }}"
   tags:
     - install
     - packages

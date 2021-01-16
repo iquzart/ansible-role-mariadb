@@ -4,8 +4,7 @@
 
 mariadb_version: 10.5
 
-mariadb_daemon: mariadb
-
+# Server Config
 mariadb_port: 3306
 mariadb_data_dir: /data/database
 mariadb_bind_address: 0.0.0.0
