@@ -20,7 +20,7 @@ Features
 Support Matrix
 ---------------
 | Destro | MariaDB 10.5 | 
-| --- | --- | --- |
+| --- | --- |
 | CentOS 8 | Supported (Tested) | 
 | CentOS 7 | Supported (Tested) |
 | Ubuntu 20.04 LTS | Supported (Tested) |
