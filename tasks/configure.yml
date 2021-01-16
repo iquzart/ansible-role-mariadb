@@ -39,7 +39,7 @@
     dest: "{{ mariadb_config_dir }}/server-custom.cnf"
     owner: root
     group: root
-    mode: 644
+    mode: "644"
 
 - name: Start and enable MariaDB service on boot
   systemd:
