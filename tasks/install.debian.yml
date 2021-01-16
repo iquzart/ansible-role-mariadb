@@ -28,7 +28,7 @@
 
 - name: Debian | Create MariaDB {{ mariadb_version }} repository
   apt_repository:
-    repo: "deb [arch=amd64] http://mariadb.mirror.globo.tech/repo/{{ mariadb_version }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+    repo: "deb [arch=amd64] http://mariadb.mirror.globo.tech/repo/{{ mariadb_version }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"  # noqa 204
     state: present
     filename: "MariaDB-{{ mariadb_version }}"
     update_cache: yes
