@@ -1,2 +1,10 @@
 ---
 # defaults file for ansible-role-mariadb
+
+
+mariadb_version: 10.5
+
+# Server Config
+mariadb_port: 3306
+mariadb_data_dir: /var/lib/mysql
+mariadb_bind_address: 127.0.0.1

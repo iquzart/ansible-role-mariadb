@@ -1,0 +1,21 @@
+
+# {{ ansible_managed }}
+
+[mysqld]
+#
+# * Custom Settings
+#
+{% if mariadb_data_dir != '/var/lib/mysql' %}
+datadir={{ mariadb_data_dir }}
+{% endif %}
+{% if ansible_os_family == "RedHat" %}
+socket={{ mariadb_data_dir }}/mysql.sock
+{% endif %}
+bind-address={{ mariadb_bind_address }}
+
+[client]
+port={{ mariadb_port }}
+{% if ansible_os_family == "RedHat" %}
+socket={{ mariadb_data_dir }}/mysql.sock
+{% endif %}
+

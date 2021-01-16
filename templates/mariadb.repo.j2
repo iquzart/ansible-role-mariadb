@@ -1,0 +1,6 @@
+[MariaDB-{{ mariadb_version }}]
+name = MariaDB Repo
+baseurl = http://yum.mariadb.org/{{ mariadb_version }}/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}-amd64
+gpgcheck = 1
+module_hotfixes=1
+gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB

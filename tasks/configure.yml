@@ -1,0 +1,48 @@
+---
+- name: Check if database directory avaliable - {{ mariadb_data_dir }}
+  stat:
+    path: "{{ mariadb_data_dir | dirname }}"
+  register: stat_data_directory
+  when: mariadb_data_dir  != "/var/lib/mysql"
+
+- name: Create database directory - {{ mariadb_data_dir }}
+  block:
+    - name: Create database directory - {{ mariadb_data_dir }}
+      file:
+        state: directory
+        path: "{{ mariadb_data_dir }}"
+        recurse: yes
+        owner: mysql
+        group: mysql
+        mode: "0755"
+      when: not stat_data_directory.stat.exists
+
+    - name: Check database files in {{ mariadb_data_dir }}
+      find:
+        path: "{{ mariadb_data_dir }}"
+        patterns: "*"
+      register: stat_db_files
+
+    - name: Copying files from /var/lib/mysql to {{ mariadb_data_dir }}
+      synchronize:
+        src: "/var/lib/mysql/"
+        dest: "{{ mariadb_data_dir }}"
+        archive: yes
+      delegate_to: "{{ inventory_hostname }}"
+      when: stat_db_files.matched|int == 0
+
+  when: mariadb_data_dir  != "/var/lib/mysql"
+
+- name: Deploy custom configuration file
+  template:
+    src: server.cnf.j2
+    dest: "{{ mariadb_config_dir }}/server-custom.cnf"
+    owner: root
+    group: root
+    mode: "644"
+
+- name: Start and enable MariaDB service on boot
+  systemd:
+    name: mariadb
+    state: started
+    enabled: true

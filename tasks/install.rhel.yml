@@ -1,0 +1,22 @@
+---
+# Install MariaDB on RHEL Based systems
+
+- name: RedHat | Create MariaDB {{ mariadb_version }} repository
+  template:
+    src: mariadb.repo.j2
+    dest: "/etc/yum.repos.d/MariaDB-{{ mariadb_version }}.repo"
+    owner: root
+    group: root
+    mode: "644"
+  tags:
+    - install
+    - repository
+
+- name: RedHat | Install MariaDB {{ mariadb_version }} packages
+  yum:
+    state: present
+    enablerepo: MariaDB-{{ mariadb_version }}
+    name: "{{ mariadb_packages }}"
+  tags:
+    - install
+    - packages
