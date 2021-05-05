@@ -3,8 +3,9 @@
 
 - name: Verify
   hosts: 
+    - ubuntu2004
     - debian10
-    - centos8
+    - centos8  
   gather_facts: false
   tasks:
   - name: Example assertion
