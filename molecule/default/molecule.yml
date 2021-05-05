@@ -12,7 +12,7 @@ platforms:
     privileged: true
     pre_build_image: true
   - name: ubuntu2004
-    image: diquzart/ansible-systemd-ubuntu:2004-lts
+    image: diquzart/ansible-systemd-ubuntu
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: "/lib/systemd/systemd"
