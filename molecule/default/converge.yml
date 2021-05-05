@@ -3,7 +3,6 @@
   hosts:
     - debian10
     - centos8  
-    - ubuntu2004
   tasks:
     - name: Install rsync
       package:
