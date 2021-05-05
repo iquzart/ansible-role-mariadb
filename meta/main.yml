@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: mariadb
   author: Muhammed Iqbal
-  description: Install and configure MariaDB
+  description: Install and configure MariaDB Server
   license: MIT
   min_ansible_version: 2.9
   platforms:

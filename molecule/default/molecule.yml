@@ -11,13 +11,6 @@ platforms:
     command: "/lib/systemd/systemd"
     privileged: true
     pre_build_image: true
-  - name: ubuntu2004
-    image: diquzart/ansible-systemd-ubuntu
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: "/lib/systemd/systemd"
-    privileged: true
-    pre_build_image: true
   - name: debian10
     image: diquzart/ansible-systemd-debian
     volumes:

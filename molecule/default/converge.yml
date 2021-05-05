@@ -1,6 +1,8 @@
 ---
 - name: Converge
-  hosts: all
+  hosts:
+    - debian10
+    - centos8  
   tasks:
     - name: Install rsync
       package:

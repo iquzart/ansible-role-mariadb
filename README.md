@@ -13,8 +13,8 @@ Features
 ```
   1. Custom config with 
       - data directory
+      - bind-address      
       - port
-      - listen
 ```
 
 Support Matrix
