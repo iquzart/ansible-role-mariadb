@@ -5,6 +5,16 @@
 mariadb_version: 10.5
 
 # Server Config
-mariadb_port: 3306
-mariadb_data_dir: /data/db #/var/lib/mysql
-mariadb_bind_address: 127.0.0.1
+mariadb_port: 3361
+mariadb_data_dir: /data/database #/var/lib/mysql
+mariadb_bind_address: 0.0.0.0
+
+
+mariadb_databases: []
+mariadb_users: []
+mariadb_root_password: P@ssw0rd
+
+
+mariadb_logrotate:
+  configure: true
+  rotate: 3

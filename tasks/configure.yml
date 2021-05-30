@@ -40,9 +40,5 @@
     owner: root
     group: root
     mode: "644"
+  notify: restart and enable mariadb service
 
-- name: Start and enable MariaDB service on boot
-  systemd:
-    name: mariadb
-    state: started
-    enabled: true

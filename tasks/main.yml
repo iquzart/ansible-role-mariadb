@@ -9,6 +9,7 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
   tags:
+    - always
     - install
     - configure
 
@@ -31,3 +32,9 @@
   tags:
     - directories
     - configure
+
+- name: Security
+  include: root-password.yml
+  tags:
+    - root-password
+    - configure  
