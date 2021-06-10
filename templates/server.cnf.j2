@@ -13,6 +13,9 @@ socket={{ mariadb_data_dir }}/mysql.sock
 {% endif %}
 bind-address={{ mariadb_bind_address }}
 
+[client-server]
+port={{ mariadb_port }}
+
 [client]
 port={{ mariadb_port }}
 {% if ansible_os_family == "RedHat" %}

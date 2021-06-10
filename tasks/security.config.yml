@@ -1,0 +1,44 @@
+---
+# Set root password
+
+- name: Set MariaDB root password for
+  mysql_user:
+    name: root
+    password: "{{ mariadb_root_password }}"
+    host: "{{ item }}"
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+    state: present
+  with_items:
+    - ::1
+    - 127.0.0.1
+    - localhost
+  tags:
+    - root-password
+
+- name: Remove test DB
+  mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+  when: mariadb_remove_test_db
+  tags:
+    - remove-test-db
+
+- name: Delete anonymous MySQL server user for localhost
+  mysql_user:
+    user: ''
+    state: absent
+    login_user: root
+    host: "{{ item }}"
+    login_password: "{{ mariadb_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+  when: mariadb_remove_anonymous_user
+  with_items:
+    - "{{ ansible_hostname }}"
+    - ''
+  tags:
+    - remove-anonymous-user

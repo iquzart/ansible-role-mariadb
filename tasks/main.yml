@@ -9,6 +9,7 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
   tags:
+    - always
     - install
     - configure
 
@@ -30,4 +31,13 @@
   include: configure.yml
   tags:
     - directories
+    - configure
+
+- name: Flush all the handlers
+  meta: flush_handlers
+
+- name: Security Configs
+  include: security.config.yml
+  tags:
+    - security-configs
     - configure

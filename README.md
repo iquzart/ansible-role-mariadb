@@ -15,6 +15,9 @@ Features
       - data directory
       - bind-address      
       - port
+      - Set root password
+      - Remove anonymouse
+      - Remove test database
 ```
 
 Support Matrix
@@ -38,6 +41,8 @@ Role Variables
 | mariadb_port  | MariaDB PORT  | 3306  |
 | mariadb_data_dir  | Database directory  | /var/lib/mysql |
 | mariadb_bind_address  | MariaDB listen on  | 127.0.0.1  |
+| mariadb_remove_anonymous_user | Remove MariaDB anonymouse user | true |
+| mariadb_remove_test_db | Remove test database | true |
 
 Example Playbook
 ----------------
