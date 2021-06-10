@@ -41,4 +41,3 @@
     group: root
     mode: "644"
   notify: restart and enable mariadb service
-

@@ -33,8 +33,11 @@
     - directories
     - configure
 
-- name: Security
-  include: root-password.yml
+- name: Flush all the handlers
+  meta: flush_handlers
+
+- name: Security Configs
+  include: security.config.yml
   tags:
-    - root-password
-    - configure  
+    - security-configs
+    - configure

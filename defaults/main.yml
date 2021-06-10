@@ -9,11 +9,10 @@ mariadb_port: 3361
 mariadb_data_dir: /data/database #/var/lib/mysql
 mariadb_bind_address: 0.0.0.0
 
-
-mariadb_databases: []
-mariadb_users: []
 mariadb_root_password: P@ssw0rd
-
+mariadb_remove_anonymous_user: true
+mariadb_disallow_root_login_remotely: true
+mariadb_remove_test_db: true
 
 mariadb_logrotate:
   configure: true

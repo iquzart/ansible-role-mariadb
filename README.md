@@ -38,6 +38,8 @@ Role Variables
 | mariadb_port  | MariaDB PORT  | 3306  |
 | mariadb_data_dir  | Database directory  | /var/lib/mysql |
 | mariadb_bind_address  | MariaDB listen on  | 127.0.0.1  |
+| mariadb_remove_anonymous_user | Remove MariaDB anonymouse user | true |
+|  |  |  |
 
 Example Playbook
 ----------------
