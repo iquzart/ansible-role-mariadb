@@ -36,6 +36,7 @@
     host: "{{ item }}"
     login_password: "{{ mariadb_root_password }}"
     login_unix_socket: "{{ mariadb_socket }}"
+  when: mariadb_remove_anonymous_user
   with_items:
     - "{{ ansible_hostname }}"
     - ''
